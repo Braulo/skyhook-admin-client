@@ -7,27 +7,29 @@ import { ApiService } from 'src/app/services/api/api.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public email: string = '';
-  public password: string = '';
+  public email: string = 'admin@skyhook.com';
+  public password: string = 'admin';
+  public errors: any;
+  public token: string = '';
 
   constructor(public apiService: ApiService) {}
 
   ngOnInit(): void {}
 
   login(email: string, password: string): void {
-    console.log(email, password);
-
     this.apiService
-      .post('auth/login/41cb293c-22f9-4ebc-877c-c3cb030faeeb', {
+      .post('auth/login/1', {
         email,
         password,
       })
       .subscribe(
         (res) => {
+          this.token= (res as string);
           console.log(res);
         },
         (err) => {
-          console.log(err);
+          this.errors = err.error;
+          console.log('test', err);
         }
       );
   }

@@ -13,10 +13,12 @@
       matInput
       type="password"
       name="password"
-      id="email"
+      id="password"
       placeholder="Password"
       [(ngModel)]="password"
     />
     <button mat-button (click)="login(email, password)">Login</button>
+    <p>{{this.errors}}</p>
+    <p>{{this.token}}</p>
   </div>
 </div>
