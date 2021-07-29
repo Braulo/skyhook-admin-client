@@ -1,0 +1,31 @@
+.login-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .login-card {
+    padding: 2rem;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    input,
+    button {
+      margin: 0.5rem;
+    }
+
+    input {
+      height: 40px;
+    }
+
+    button {
+      height: 30px;
+      width: 100px;
+      align-self: center;
+    }
+  }
+}
