@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  skyhookUrl: 'http://localhost:3000',
+  // skyhookUrl: 'http://192.168.178.108:3000',
+  clientId: '1',
+  realmId: '1',
+  skyhookApiEndpoint: '/api',
 };
 
 /*

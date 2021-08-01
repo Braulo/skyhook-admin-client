@@ -1,0 +1,26 @@
+<div class="realm-dialog-wrapper">
+  <form class="realm-form" [formGroup]="realmApplicationForm" (ngSubmit)="onSubmit()">
+    <div class="form-fields-wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>ClientId</mat-label>
+        <input matInput placeholder="Master-Client" formControlName="clientId" id="clientId" required />
+        <mat-error *ngIf="!this.realmApplicationForm.valid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ClientSecret</mat-label>
+        <input matInput placeholder="SuperSecretPassword" formControlName="clientSecret" id="clientSecret" required />
+        <mat-error *ngIf="!this.realmApplicationForm.valid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Display name</mat-label>
+        <input matInput placeholder="This is the user client" formControlName="displayName" id="displayName" required />
+        <mat-error *ngIf="!this.realmApplicationForm.valid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <button mat-raised-button (click)="onSubmit()" [disabled]="!realmApplicationForm.valid">
+    {{ this.data.realmApplication ? 'Update RealmApplication' : 'Create RealmApplication' }}
+  </button>
+</div>

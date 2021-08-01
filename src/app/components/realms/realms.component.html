@@ -1,0 +1,50 @@
+<h1>Realms</h1>
+<button mat-raised-button (click)="openRealmDialog()">Create new Realm</button>
+<div class="table-wrapper">
+  <div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="realmData" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let realm">{{ realm.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let realm">{{ realm.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="realmApplications">
+        <th mat-header-cell *matHeaderCellDef>Realm Applications</th>
+        <td mat-cell *matCellDef="let realm">
+          <button mat-raised-button (click)="openRealmApplicationDialog(realm)">Add</button>
+          <ul *ngFor="let realmApplication of realm.realmApplications">
+            <li>
+              {{ realmApplication.displayName }}
+              <button mat-raised-button (click)="openRealmApplicationDialog(realm, realmApplication)">Edit</button>
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="realmRoles">
+        <th mat-header-cell *matHeaderCellDef>Roles</th>
+        <td mat-cell *matCellDef="let realm">
+          <ul *ngFor="let realmRole of realm.realmRoles">
+            <li>{{ realmRole.name }} = {{ realmRole.displayName }}</li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let realm">
+          <button mat-raised-button (click)="openRealmDialog(realm)">Edit</button>
+          <button mat-raised-button (click)="deleteRealm(realm)">Delete</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="realmColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: realmColumns"></tr>
+    </table>
+  </div>
+</div>

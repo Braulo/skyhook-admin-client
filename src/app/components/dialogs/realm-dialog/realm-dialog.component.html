@@ -1,0 +1,12 @@
+<div class="realm-dialog-wrapper">
+  <form class="realm-form" [formGroup]="realmForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Realm Name</mat-label>
+      <input matInput placeholder="AdminClient" formControlName="name" id="name" required />
+      <mat-error *ngIf="!this.realmForm.valid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button (click)="onSubmit()" [disabled]="!realmForm.valid">
+    {{ this.data ? 'Update Realm' : 'Create Realm' }}
+  </button>
+</div>

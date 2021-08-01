@@ -18,7 +18,8 @@
       [(ngModel)]="password"
     />
     <button mat-button (click)="login(email, password)">Login</button>
-    <p>{{this.errors}}</p>
+    <p *ngIf="this.error">Error</p>
+    <p>{{this.error}}</p>
     <p>{{this.token}}</p>
   </div>
 </div>
