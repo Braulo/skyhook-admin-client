@@ -3,8 +3,8 @@ import { CanActivate, Router } from '@angular/router';
 import { iif, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/model/user.model';
-import { ApiService } from '../api/api.service';
 import { catchError, mergeMap } from 'rxjs/operators';
+import { ApiService } from '../../api/api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +13,9 @@ export class AuthGuardService implements CanActivate {
   constructor(private apiService: ApiService, private router: Router) {}
 
   canActivate(): Observable<boolean> {
-    return this.apiService.get(`/auth/checkToken/${environment.skyhookMasterApplicationId}`).pipe(
+    return this.apiService.get(`/auth/checkToken`).pipe(
       mergeMap((v) =>
         iif(() => {
-          console.log(v);
           if (!v) {
             this.router.parseUrl('/login');
             return false;

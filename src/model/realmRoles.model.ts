@@ -1,7 +1,7 @@
 import { Realm } from './realm.model';
 import { User } from './user.model';
 
-export interface RealmRoles {
+export interface RealmRole {
   id?: string;
   name?: string;
   displayName?: string;

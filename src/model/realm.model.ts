@@ -1,9 +1,9 @@
 import { RealmApplication } from './realmApplication.model';
-import { RealmRoles } from './realmRoles.model';
+import { RealmRole } from './realmRoles.model';
 
 export interface Realm {
   id?: string;
   name?: string;
-  realmRoles?: RealmRoles[];
+  realmRoles?: RealmRole[];
   realmApplications?: RealmApplication[];
 }

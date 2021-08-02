@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ApiService } from 'src/app/services/api/api.service';
+import { RealmService } from 'src/app/services/realm/realm-service.service';
 import { Realm } from 'src/model/realm.model';
 import { RealmApplication } from 'src/model/realmApplication.model';
 import { RealmApplicationDialogComponent } from '../dialogs/realm-application-dialog/realm-application-dialog.component';
@@ -14,22 +14,15 @@ import { RealmDialogComponent } from '../dialogs/realm-dialog/realm-dialog.compo
 })
 export class RealmsComponent implements OnInit {
   public realms: Observable<Realm[]>;
-  constructor(private apiService: ApiService, private dialog: MatDialog) {}
+  constructor(private realmService: RealmService, private dialog: MatDialog) {}
 
   realmColumns: string[] = ['id', 'name', 'realmApplications', 'realmRoles', 'actions'];
   realmData: Realm[];
 
   ngOnInit(): void {
-    console.log('init');
-    this.apiService.get<Realm[]>('/realm/1').subscribe(
-      (res) => {
-        console.log('Realms', res);
-        this.realmData = res;
-      },
-      (err) => {
-        console.log('err', err);
-      },
-    );
+    this.realmService.getAppRealms().subscribe((res) => {
+      this.realmData = res;
+    });
   }
 
   openRealmDialog(realmData: Realm = null) {
@@ -44,13 +37,9 @@ export class RealmsComponent implements OnInit {
   }
 
   deleteRealm(realmData: Realm) {
-    this.apiService.delete<Realm>(`/realm/${realmData.id}`).subscribe(
-      (res) => {
-        console.log('res delete', res);
-        this.ngOnInit();
-      },
-      (err) => {},
-    );
+    this.realmService.deleteRealmById(realmData.id, realmData).subscribe((res) => {
+      this.ngOnInit();
+    });
   }
 
   openRealmApplicationDialog(realm: Realm = null, realmApplication: RealmApplication = null) {

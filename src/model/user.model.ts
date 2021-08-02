@@ -1,5 +1,5 @@
 import { RealmApplication } from './realmApplication.model';
-import { RealmRoles } from './realmRoles.model';
+import { RealmRole } from './realmRoles.model';
 
 export interface User {
   id?: string;
@@ -8,5 +8,5 @@ export interface User {
   username?: string;
   emailConfirmed?: boolean;
   realmApplication?: RealmApplication;
-  realmRoles?: RealmRoles[];
+  realmRoles?: RealmRole[];
 }

@@ -11,16 +11,23 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from './services/api/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RealmsComponent } from './components/realms/realms.component';
-import { AuthGuardService } from './services/auth/auth-guard.service';
 import { HomeComponent } from './components/home/home.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RealmDialogComponent } from './components/dialogs/realm-dialog/realm-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RealmApplicationDialogComponent } from './components/dialogs/realm-application-dialog/realm-application-dialog.component';
+import { AuthGuardService } from './services/auth/guard/auth-guard.service';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RealmsComponent, HomeComponent, RealmDialogComponent, RealmApplicationDialogComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RealmsComponent,
+    HomeComponent,
+    RealmDialogComponent,
+    RealmApplicationDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -3,6 +3,7 @@ import { inject } from '@angular/core/testing';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api/api.service';
+import { RealmService } from 'src/app/services/realm/realm-service.service';
 import { Realm } from 'src/model/realm.model';
 
 @Component({
@@ -14,8 +15,8 @@ export class RealmDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Realm,
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
     private dialog: MatDialog,
+    private realmService: RealmService,
   ) {}
 
   realmForm = this.formBuilder.group({
@@ -40,17 +41,12 @@ export class RealmDialogComponent implements OnInit {
       this.data = {
         name: this.realmForm.get('name').value,
       };
-      this.apiService.post<Realm, Realm>('/realm/1', this.data).subscribe(
-        (res) => {
-          this.dialog.closeAll();
-        },
-        (err) => {
-          console.log('err create', err);
-        },
-      );
+      this.data.name = this.realmForm.get('name').value;
+      this.realmService.createRealm(this.data).subscribe();
     } else {
       this.data.name = this.realmForm.get('name').value;
-      this.apiService.update<Realm, Realm>(`/realm/${this.data.id}`, this.data).subscribe();
+      this.realmService.updateRealmById(this.data.id, this.data).subscribe();
     }
+    this.dialog.closeAll();
   }
 }
