@@ -1,0 +1,14 @@
+<p>Add Role to user {{ this.data.user.email }}</p>
+<div class="wrapper-user-roles">
+  <mat-form-field appearance="fill">
+    <mat-label>Realm Roles</mat-label>
+    <mat-select [(value)]="selectedRole">
+      <mat-option *ngFor="let realmRole of realmRoles" [value]="realmRole">
+        {{ realmRole.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button (click)="addRoleToUser()">Add Role to User</button>
+  <button mat-raised-button (click)="deleteRoleFromUser()">Delete Role from User</button>
+</div>

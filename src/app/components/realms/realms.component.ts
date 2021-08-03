@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RealmService } from 'src/app/services/realm/realm-service.service';
 import { Realm } from 'src/model/realm.model';
 import { RealmApplication } from 'src/model/realmApplication.model';
+import { RealmRole } from 'src/model/realmRoles.model';
 import { RealmApplicationDialogComponent } from '../dialogs/realm-application-dialog/realm-application-dialog.component';
 import { RealmDialogComponent } from '../dialogs/realm-dialog/realm-dialog.component';
+import { RealmRolesDialogComponent } from '../dialogs/realm-roles-dialog/realm-roles-dialog.component';
 
 @Component({
   selector: 'app-realms',
@@ -14,7 +17,7 @@ import { RealmDialogComponent } from '../dialogs/realm-dialog/realm-dialog.compo
 })
 export class RealmsComponent implements OnInit {
   public realms: Observable<Realm[]>;
-  constructor(private realmService: RealmService, private dialog: MatDialog) {}
+  constructor(private realmService: RealmService, private dialog: MatDialog, private router: Router) {}
 
   realmColumns: string[] = ['id', 'name', 'realmApplications', 'realmRoles', 'actions'];
   realmData: Realm[];
@@ -42,6 +45,9 @@ export class RealmsComponent implements OnInit {
     });
   }
 
+  showAllUserForRealm(realm: Realm) {
+    this.router.navigateByUrl(`/users/${realm.id}`);
+  }
   openRealmApplicationDialog(realm: Realm = null, realmApplication: RealmApplication = null) {
     this.dialog
       .open(RealmApplicationDialogComponent, {
@@ -49,6 +55,22 @@ export class RealmsComponent implements OnInit {
       })
       .afterClosed()
       .subscribe(() => {
+        this.ngOnInit();
+      });
+  }
+
+  openRealmRolesDialog(realm: Realm, realmRole: RealmRole = null) {
+    console.log('openRealm Dialgo', realm, realmRole);
+
+    this.dialog
+      .open(RealmRolesDialogComponent, {
+        data: {
+          realm,
+          realmRole,
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
         this.ngOnInit();
       });
   }

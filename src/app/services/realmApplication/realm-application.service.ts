@@ -15,14 +15,8 @@ export class RealmApplicationService {
     return this.apiService.post<RealmApplication, RealmApplication>(`${this.endpoint}/${realmId}`, realmApplication);
   }
 
-  updateRealmApplicationById(
-    realmApplicationId: string,
-    realmApplication: RealmApplication,
-  ): Observable<RealmApplication> {
-    return this.apiService.update<RealmApplication, RealmApplication>(
-      `${this.endpoint}/${realmApplicationId}`,
-      realmApplication,
-    );
+  updateRealmApplicationById(realmApplication: RealmApplication): Observable<RealmApplication> {
+    return this.apiService.update<RealmApplication, RealmApplication>(this.endpoint, realmApplication);
   }
 
   deleteRealmApplictionById(id: string): Observable<RealmApplication> {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RealmsComponent } from './components/realms/realms.component';
+import { UsersComponent } from './components/users/users.component';
 import { AuthGuardService } from './services/auth/guard/auth-guard.service';
 
 const routes: Routes = [
@@ -23,6 +24,11 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
         path: 'home',
         component: HomeComponent,
+      },
+      {
+        canActivate: [AuthGuardService],
+        path: 'users/:realmId',
+        component: UsersComponent,
       },
       {
         canActivate: [],

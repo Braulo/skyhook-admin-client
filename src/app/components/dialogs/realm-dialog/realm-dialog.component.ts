@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { inject } from '@angular/core/testing';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiService } from 'src/app/services/api/api.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RealmService } from 'src/app/services/realm/realm-service.service';
 import { Realm } from 'src/model/realm.model';
 
@@ -45,7 +43,7 @@ export class RealmDialogComponent implements OnInit {
       this.realmService.createRealm(this.data).subscribe();
     } else {
       this.data.name = this.realmForm.get('name').value;
-      this.realmService.updateRealmById(this.data.id, this.data).subscribe();
+      this.realmService.updateRealm(this.data).subscribe();
     }
     this.dialog.closeAll();
   }

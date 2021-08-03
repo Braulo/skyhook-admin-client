@@ -16,11 +16,11 @@ export class RealmService {
   }
 
   createRealm(realm: Realm): Observable<Realm> {
-    return this.apiService.post<Realm, Realm>(`${this.endpoint}`, realm);
+    return this.apiService.post<Realm, Realm>(this.endpoint, realm);
   }
 
-  updateRealmById(id: string, body: Realm): Observable<Realm> {
-    return this.apiService.update<Realm, Realm>(`${this.endpoint}/${id}`, body);
+  updateRealm(body: Realm): Observable<Realm> {
+    return this.apiService.update<Realm, Realm>(this.endpoint, body);
   }
 
   deleteRealmById(id: string, body: Realm): Observable<Realm> {

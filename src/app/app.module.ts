@@ -18,6 +18,10 @@ import { RealmDialogComponent } from './components/dialogs/realm-dialog/realm-di
 import { ReactiveFormsModule } from '@angular/forms';
 import { RealmApplicationDialogComponent } from './components/dialogs/realm-application-dialog/realm-application-dialog.component';
 import { AuthGuardService } from './services/auth/guard/auth-guard.service';
+import { RealmRolesDialogComponent } from './components/dialogs/realm-roles-dialog/realm-roles-dialog.component';
+import { UsersComponent } from './components/users/users.component';
+import { RealmUserRolesDialogComponent } from './components/dialogs/realm-user-roles-dialog/realm-user-roles-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,9 @@ import { AuthGuardService } from './services/auth/guard/auth-guard.service';
     HomeComponent,
     RealmDialogComponent,
     RealmApplicationDialogComponent,
+    RealmRolesDialogComponent,
+    UsersComponent,
+    RealmUserRolesDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,7 @@ import { AuthGuardService } from './services/auth/guard/auth-guard.service';
     MatTableModule,
     MatDialogModule,
     ReactiveFormsModule,
+    MatSelectModule,
   ],
   providers: [ApiService, AuthGuardService],
   bootstrap: [AppComponent],

@@ -1,0 +1,27 @@
+<div class="realmRole-dialog-wrapper">
+  <form class="realm-form" [formGroup]="realmRoleForm" (ngSubmit)="onSubmit()">
+    <div class="form-fields-wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>Role name</mat-label>
+        <input matInput placeholder="Realm Admin" formControlName="name" id="name" required />
+        <mat-error *ngIf="!this.realmRoleForm.valid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Display Name</mat-label>
+        <input
+          matInput
+          placeholder="The Admin for every Realm"
+          formControlName="displayName"
+          id="displayName"
+          required
+        />
+        <mat-error *ngIf="!this.realmRoleForm.valid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <button mat-raised-button (click)="onSubmit()" [disabled]="!realmRoleForm.valid">
+    {{ this.data.realmRole ? 'Update Realm Role' : 'Create Realm Role' }}
+  </button>
+  <button mat-raised-button (click)="deleteRealmRole()" *ngIf="this.data.realmRole">Delete</button>
+</div>

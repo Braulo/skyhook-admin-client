@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ApiService } from 'src/app/services/api/api.service';
 import { RealmApplicationService } from 'src/app/services/realmApplication/realm-application.service';
 import { Realm } from 'src/model/realm.model';
 import { RealmApplication } from 'src/model/realmApplication.model';
@@ -15,7 +14,6 @@ export class RealmApplicationDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { realm: Realm; realmApplication: RealmApplication },
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
     private dialog: MatDialog,
     private realmApplicationService: RealmApplicationService,
   ) {}
@@ -55,11 +53,9 @@ export class RealmApplicationDialogComponent implements OnInit {
       this.data.realmApplication.clientSecret = this.realmApplicationForm.get('clientSecret').value;
       this.data.realmApplication.displayName = this.realmApplicationForm.get('displayName').value;
 
-      this.realmApplicationService
-        .updateRealmApplicationById(this.data.realmApplication.id, this.data.realmApplication)
-        .subscribe((res) => {
-          console.log('update realmappictaion', res);
-        });
+      this.realmApplicationService.updateRealmApplicationById(this.data.realmApplication).subscribe((res) => {
+        console.log('update realmappictaion', res);
+      });
     } else {
       (this.data.realmApplication as any) = {
         clientId: this.realmApplicationForm.get('clientId').value,
