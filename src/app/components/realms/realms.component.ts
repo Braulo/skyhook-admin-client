@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth/auth.service';
 import { RealmService } from 'src/app/services/realm/realm-service.service';
 import { Realm } from 'src/model/realm.model';
 import { RealmApplication } from 'src/model/realmApplication.model';
@@ -17,15 +18,24 @@ import { RealmRolesDialogComponent } from '../dialogs/realm-roles-dialog/realm-r
 })
 export class RealmsComponent implements OnInit {
   public realms: Observable<Realm[]>;
-  constructor(private realmService: RealmService, private dialog: MatDialog, private router: Router) {}
+  constructor(
+    private realmService: RealmService,
+    private dialog: MatDialog,
+    private router: Router,
+    private authService: AuthService,
+  ) {}
 
   realmColumns: string[] = ['id', 'name', 'realmApplications', 'realmRoles', 'actions'];
   realmData: Realm[];
+  username: string;
+  email: string;
 
   ngOnInit(): void {
     this.realmService.getAppRealms().subscribe((res) => {
       this.realmData = res;
     });
+    this.username = localStorage.getItem('username');
+    this.email = localStorage.getItem('email');
   }
 
   openRealmDialog(realmData: Realm = null) {
@@ -73,5 +83,11 @@ export class RealmsComponent implements OnInit {
       .subscribe((res) => {
         this.ngOnInit();
       });
+  }
+
+  logout() {
+    this.authService.logout().subscribe((res) => {
+      this.router.navigateByUrl('/login');
+    });
   }
 }

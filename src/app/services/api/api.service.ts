@@ -16,7 +16,7 @@ export class ApiService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token') || '',
+          'Authorization': localStorage.getItem('accessToken') || '',
         }),
       },
     );
@@ -29,7 +29,7 @@ export class ApiService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token') || '',
+          'Authorization': localStorage.getItem('accessToken') || '',
         }),
       },
     );
@@ -42,7 +42,7 @@ export class ApiService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token') || '',
+          'Authorization': localStorage.getItem('accessToken') || '',
         }),
       },
     );
@@ -54,7 +54,7 @@ export class ApiService {
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem('token') || '',
+          'Authorization': localStorage.getItem('accessToken') || '',
         }),
       },
     );

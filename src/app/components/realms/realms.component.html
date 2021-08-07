@@ -1,4 +1,9 @@
 <h1>Realms</h1>
+<div *ngIf="email" style="text-align: center">
+  <h2>username: {{ username }}</h2>
+  <h2>email: {{ email }}</h2>
+</div>
+<button mat-raised-button (click)="logout()">Logout</button>
 <button mat-raised-button (click)="openRealmDialog()">Create new Realm</button>
 <div class="table-wrapper">
   <div class="table-container mat-elevation-z8">
@@ -49,7 +54,7 @@
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let realm">
+        <td class="realm-action-buttons" mat-cell *matCellDef="let realm">
           <button mat-raised-button (click)="openRealmDialog(realm)">Edit</button>
           <button mat-raised-button (click)="deleteRealm(realm)">Delete</button>
           <button mat-raised-button (click)="showAllUserForRealm(realm)">Show Users</button>

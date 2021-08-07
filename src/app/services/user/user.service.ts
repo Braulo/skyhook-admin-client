@@ -18,4 +18,8 @@ export class UserService {
   updateUser(user: User): Observable<User> {
     return this.apiService.update(this.endpoint, user);
   }
+
+  logoutUserById(userId: string): Observable<boolean> {
+    return this.apiService.get(`${this.endpoint}/logout/${userId}`);
+  }
 }

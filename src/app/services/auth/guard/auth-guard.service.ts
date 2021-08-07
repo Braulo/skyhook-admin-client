@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { iif, Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { User } from 'src/model/user.model';
 import { catchError, mergeMap } from 'rxjs/operators';
 import { ApiService } from '../../api/api.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuardService implements CanActivate {
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router, private authService: AuthService) {}
 
   canActivate(): Observable<boolean> {
     return this.apiService.get(`/auth/checkToken`).pipe(
@@ -20,6 +19,7 @@ export class AuthGuardService implements CanActivate {
             this.router.parseUrl('/login');
             return false;
           }
+          this.authService.saveTokenPayloadToLocalStorage();
           return true;
         }, of(true)),
       ),
