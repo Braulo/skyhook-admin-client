@@ -13,9 +13,9 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): Observable<boolean> {
     return this.apiService.get(`/auth/checkToken`).pipe(
-      mergeMap((v) =>
+      mergeMap((user) =>
         iif(() => {
-          if (!v) {
+          if (!user) {
             this.router.parseUrl('/login');
             return false;
           }

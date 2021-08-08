@@ -21,26 +21,14 @@ export class RealmUserRolesDialogComponent implements OnInit {
   selectedRole: RealmRole;
 
   ngOnInit(): void {
-    this.realmRoleService.getAllRealmRolesByRealmId(this.data.realmId).subscribe(
-      (res) => {
-        this.realmRoles = res;
-      },
-      (err) => {
-        console.log('update realm role for user err test', err);
-      },
-    );
+    this.realmRoleService.getAllRealmRolesByRealmId(this.data.realmId).subscribe((res) => {
+      this.realmRoles = res;
+    });
   }
 
   addRoleToUser() {
     this.data.user.realmRoles.push(this.selectedRole);
-    this.userService.updateUser(this.data.user).subscribe(
-      (res) => {
-        console.log('res', res);
-      },
-      (err) => {
-        console.log('err', err);
-      },
-    );
+    this.userService.updateUser(this.data.user).subscribe();
   }
 
   deleteRoleFromUser() {
@@ -52,13 +40,6 @@ export class RealmUserRolesDialogComponent implements OnInit {
 
     this.data.user.realmRoles = newRoles;
 
-    this.userService.updateUser(this.data.user).subscribe(
-      (res) => {
-        console.log('res', res);
-      },
-      (err) => {
-        console.log('err', err);
-      },
-    );
+    this.userService.updateUser(this.data.user).subscribe();
   }
 }

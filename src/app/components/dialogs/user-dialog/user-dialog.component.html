@@ -1,0 +1,10 @@
+<div class="realm-dialog-wrapper">
+  <form class="realm-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Peter" formControlName="username" id="username" required />
+      <mat-error *ngIf="!this.userForm.valid">{{ getErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </form>
+  <button mat-raised-button (click)="onSubmit()" [disabled]="!userForm.valid">Update User</button>
+</div>

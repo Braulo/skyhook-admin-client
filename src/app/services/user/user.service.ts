@@ -22,4 +22,12 @@ export class UserService {
   logoutUserById(userId: string): Observable<boolean> {
     return this.apiService.get(`${this.endpoint}/logout/${userId}`);
   }
+
+  banUserById(userId: string): Observable<boolean> {
+    return this.apiService.get(`${this.endpoint}/ban/${userId}`);
+  }
+
+  unbanUserById(userId: string): Observable<boolean> {
+    return this.apiService.get(`${this.endpoint}/unban/${userId}`);
+  }
 }

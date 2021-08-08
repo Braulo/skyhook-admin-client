@@ -43,7 +43,7 @@ export class RealmApplicationDialogComponent implements OnInit {
   }
 
   deleteRealmApplication() {
-    this.realmApplicationService.deleteRealmApplictionById(this.data.realmApplication.id).subscribe((res) => {
+    this.realmApplicationService.deleteRealmApplictionById(this.data.realmApplication.id).subscribe(() => {
       this.dialog.closeAll();
     });
   }
@@ -53,9 +53,7 @@ export class RealmApplicationDialogComponent implements OnInit {
       this.data.realmApplication.clientSecret = this.realmApplicationForm.get('clientSecret').value;
       this.data.realmApplication.displayName = this.realmApplicationForm.get('displayName').value;
 
-      this.realmApplicationService.updateRealmApplicationById(this.data.realmApplication).subscribe((res) => {
-        console.log('update realmappictaion', res);
-      });
+      this.realmApplicationService.updateRealmApplicationById(this.data.realmApplication).subscribe(() => {});
     } else {
       (this.data.realmApplication as any) = {
         clientId: this.realmApplicationForm.get('clientId').value,
@@ -64,9 +62,7 @@ export class RealmApplicationDialogComponent implements OnInit {
       };
       this.realmApplicationService
         .createRealmApplicationByRealmId(this.data.realm.id, this.data.realmApplication)
-        .subscribe((res) => {
-          console.log('create realm ', res);
-        });
+        .subscribe();
     }
     this.dialog.closeAll();
   }

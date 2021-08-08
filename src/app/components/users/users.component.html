@@ -54,8 +54,9 @@
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td class="user-action-buttons" mat-cell *matCellDef="let user">
           <button mat-raised-button (click)="logoutUser(user)">Logout</button>
-          <button mat-raised-button>Ban</button>
-          <button mat-raised-button>Edit</button>
+          <button mat-raised-button (click)="banUser(user)" *ngIf="!user.banned">Ban</button>
+          <button mat-raised-button (click)="unbanUser(user)" *ngIf="user.banned">Unban</button>
+          <button mat-raised-button (click)="openEditUserModal(user)">Edit</button>
         </td>
       </ng-container>
 

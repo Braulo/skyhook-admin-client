@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { interval, Observable } from 'rxjs';
+import { delay, retryWhen, switchMap, take } from 'rxjs/operators';
 import { AccessTokenPayload } from 'src/model/accessTokenPayload';
 import { ApiService } from '../../api/api.service';
 
@@ -23,6 +24,12 @@ export class AuthService {
     });
   }
 
+  refreshAccessToken(): Observable<string> {
+    return this.apiService.post(`${this.endpoint}/refreshaccesstoken`, {
+      refreshToken: localStorage.getItem('refreshToken'),
+    });
+  }
+
   saveTokenPayloadToLocalStorage() {
     const accessToken = localStorage.getItem('accessToken');
     const decodedAccessToken = JSON.parse(atob(accessToken.split('.')[1])) as AccessTokenPayload;
@@ -31,5 +38,36 @@ export class AuthService {
     localStorage.setItem('iat', decodedAccessToken.iat);
     localStorage.setItem('userId', decodedAccessToken.userId);
     localStorage.setItem('username', decodedAccessToken.username);
+  }
+
+  getTokenPayloadFromLocalStorage(): AccessTokenPayload {
+    return {
+      email: localStorage.getItem('email'),
+      exp: localStorage.getItem('exp'),
+      iat: localStorage.getItem('iat'),
+      userId: localStorage.getItem('userId'),
+      username: localStorage.getItem('username'),
+    };
+  }
+
+  hasUserValidRefreshToken(): Observable<boolean> {
+    return this.apiService.post(`${this.endpoint}/checkrefreshtoken`, {
+      refreshToken: localStorage.getItem('refreshToken'),
+    });
+  }
+
+  startAutoRefresh() {
+    const accessTokenCheckInterval = interval(100000);
+    accessTokenCheckInterval
+      .pipe(
+        switchMap(() => {
+          return this.refreshAccessToken();
+        }),
+        retryWhen((errors) => errors.pipe(delay(50000), take(10))),
+      )
+      .subscribe((res) => {
+        localStorage.setItem('accessToken', res);
+        this.saveTokenPayloadToLocalStorage();
+      });
   }
 }

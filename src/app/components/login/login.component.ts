@@ -10,8 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth/auth.service';
 export class LoginComponent implements OnInit {
   public email: string = 'admin@skyhook.com';
   public password: string = 'admin';
-  public error: string;
-  public token: string = '';
+  public message: string;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,12 +22,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('accessToken', res.accessToken);
         localStorage.setItem('refreshToken', res.refreshToken);
         if (res) {
-          this.token = res.accessToken;
           this.router.navigateByUrl('/realms');
         }
       },
       (err) => {
-        this.error = err;
+        this.authService.startAutoRefresh();
+        this.message = err.error.message;
       },
     );
   }

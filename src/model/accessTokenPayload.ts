@@ -1,9 +1,9 @@
 export interface AccessTokenPayload {
-  accessTokenVersion: string;
+  accessTokenVersion?: string;
   email: string;
   exp: string;
   iat: string;
-  realmApplication: string;
+  realmApplication?: string;
   userId: string;
   username: string;
 }

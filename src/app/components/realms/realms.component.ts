@@ -50,7 +50,7 @@ export class RealmsComponent implements OnInit {
   }
 
   deleteRealm(realmData: Realm) {
-    this.realmService.deleteRealmById(realmData.id, realmData).subscribe((res) => {
+    this.realmService.deleteRealmById(realmData.id, realmData).subscribe(() => {
       this.ngOnInit();
     });
   }
@@ -70,8 +70,6 @@ export class RealmsComponent implements OnInit {
   }
 
   openRealmRolesDialog(realm: Realm, realmRole: RealmRole = null) {
-    console.log('openRealm Dialgo', realm, realmRole);
-
     this.dialog
       .open(RealmRolesDialogComponent, {
         data: {
@@ -80,7 +78,7 @@ export class RealmsComponent implements OnInit {
         },
       })
       .afterClosed()
-      .subscribe((res) => {
+      .subscribe(() => {
         this.ngOnInit();
       });
   }

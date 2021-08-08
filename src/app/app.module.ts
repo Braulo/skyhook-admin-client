@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -22,6 +21,8 @@ import { RealmRolesDialogComponent } from './components/dialogs/realm-roles-dial
 import { UsersComponent } from './components/users/users.component';
 import { RealmUserRolesDialogComponent } from './components/dialogs/realm-user-roles-dialog/realm-user-roles-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserDialogComponent } from './components/dialogs/user-dialog/user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
     RealmRolesDialogComponent,
     UsersComponent,
     RealmUserRolesDialogComponent,
+    UserDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatSnackBarModule,
   ],
   providers: [ApiService, AuthGuardService],
   bootstrap: [AppComponent],
