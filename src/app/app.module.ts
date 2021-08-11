@@ -23,7 +23,7 @@ import { RealmUserRolesDialogComponent } from './components/dialogs/realm-user-r
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserDialogComponent } from './components/dialogs/user-dialog/user-dialog.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +50,7 @@ import { UserDialogComponent } from './components/dialogs/user-dialog/user-dialo
     ReactiveFormsModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatExpansionModule,
   ],
   providers: [ApiService, AuthGuardService],
   bootstrap: [AppComponent],

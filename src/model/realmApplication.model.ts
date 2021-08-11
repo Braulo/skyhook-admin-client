@@ -1,4 +1,5 @@
 import { Realm } from './realm.model';
+import { RealmApplicationURL } from './realmApplicationURL.model';
 import { User } from './user.model';
 
 export interface RealmApplication {
@@ -8,4 +9,5 @@ export interface RealmApplication {
   displayName?: string;
   users?: User[];
   realm?: Realm;
+  realmApplicationURLs?: RealmApplicationURL[];
 }

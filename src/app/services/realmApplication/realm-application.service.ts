@@ -11,6 +11,10 @@ export class RealmApplicationService {
 
   endpoint: string = '/realmapplication';
 
+  getRealmApplicationById(realmApplicationId: string): Observable<RealmApplication> {
+    return this.apiService.get(`${this.endpoint}/${realmApplicationId}`);
+  }
+
   createRealmApplicationByRealmId(realmId: string, realmApplication: RealmApplication): Observable<RealmApplication> {
     return this.apiService.post<RealmApplication, RealmApplication>(`${this.endpoint}/${realmId}`, realmApplication);
   }

@@ -4,3 +4,11 @@
   align-items: center;
   flex-direction: column;
 }
+
+.realm-dialog-wrapper {
+  max-height: 700px;
+}
+
+mat-accordion {
+  margin: 0 0.5rem;
+}

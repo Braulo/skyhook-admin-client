@@ -18,8 +18,28 @@
         <input matInput placeholder="This is the user client" formControlName="displayName" id="displayName" required />
         <mat-error *ngIf="!this.realmApplicationForm.valid">{{ getErrorMessage() }}</mat-error>
       </mat-form-field>
+
+      <div class="container-urls">
+        <p>RealmApplication URL's</p>
+        <mat-accordion *ngFor="let realmApplicationURL of realmApplicationURLs">
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ realmApplicationURL.url }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-raised-button type="button" (click)="deleteRealmApplicationURL(realmApplicationURL)">
+              Delete
+            </button>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>URL</mat-label>
+        <input matInput placeholder="http://test" formControlName="realmApplicationUrl" id="realmApplicationUrl" />
+      </mat-form-field>
+      <button mat-raised-button type="button" (click)="addRealmApplicationURL()">Add</button>
     </div>
   </form>
+  <br />
   <button mat-raised-button (click)="onSubmit()" [disabled]="!realmApplicationForm.valid">
     {{ this.data.realmApplication ? 'Update RealmApplication' : 'Create RealmApplication' }}
   </button>
