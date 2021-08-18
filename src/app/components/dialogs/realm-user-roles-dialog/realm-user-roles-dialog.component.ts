@@ -33,8 +33,6 @@ export class RealmUserRolesDialogComponent implements OnInit {
 
   deleteRoleFromUser() {
     const newRoles = this.data.user.realmRoles.filter((role) => {
-      console.log('selected', this.selectedRole.id);
-      console.log('role', role.id);
       return role.id !== this.selectedRole.id;
     });
 
