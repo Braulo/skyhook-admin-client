@@ -8,8 +8,8 @@ import { AuthService } from 'src/app/services/auth/auth/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public email: string = 'admin@skyhook.com';
-  public password: string = 'admin';
+  public email: string = 'admin@skyhook.de';
+  public password: string = '';
   public message: string;
 
   constructor(private authService: AuthService, private router: Router) {}

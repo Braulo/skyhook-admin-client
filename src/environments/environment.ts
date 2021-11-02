@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  skyhookUrl: 'http://localhost:3000',
+  skyhookUrl: 'http://192.168.178.20',
   // skyhookUrl: 'http://192.168.178.108:3000',
   clientId: 'Master Client',
   realmId: '1',
