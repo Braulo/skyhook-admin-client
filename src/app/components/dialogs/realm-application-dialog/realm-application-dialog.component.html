@@ -32,11 +32,41 @@
           </mat-expansion-panel>
         </mat-accordion>
       </div>
+
       <mat-form-field appearance="outline">
         <mat-label>URL</mat-label>
         <input matInput placeholder="http://test" formControlName="realmApplicationUrl" id="realmApplicationUrl" />
       </mat-form-field>
       <button mat-raised-button type="button" (click)="addRealmApplicationURL()">Add</button>
+
+      <div class="container-urls">
+        <p>External Provider</p>
+        <mat-accordion *ngFor="let externalProvider of externalProviders">
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ externalProvider.name }}</mat-panel-title>
+              <mat-panel-title>{{ externalProvider.key }}</mat-panel-title>
+              <mat-panel-title>{{ externalProvider.secret }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-raised-button type="button" (click)="deleteExternalProvider(externalProvider)">Delete</button>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div formGroupName="externalProvider">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Google" formControlName="name" id="externalName" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Key</mat-label>
+          <input matInput placeholder="xxxx" formControlName="key" id="externalKey" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Secret</mat-label>
+          <input matInput placeholder="xxxx" formControlName="secret" id="externalSecret" />
+        </mat-form-field>
+      </div>
+      <button mat-raised-button type="button" (click)="addExternalProvider()">Add</button>
     </div>
   </form>
   <br />

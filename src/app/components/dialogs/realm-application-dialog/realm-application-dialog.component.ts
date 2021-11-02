@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ExternalProviderService } from 'src/app/services/externalProvider/external-provider.service';
 import { RealmApplicationService } from 'src/app/services/realmApplication/realm-application.service';
 import { RealmApplicationURLService } from 'src/app/services/realmApplicationURL/realm-application-url.service';
+import { ExternalProvider } from 'src/model/externalProvider.model';
 import { Realm } from 'src/model/realm.model';
 import { RealmApplication } from 'src/model/realmApplication.model';
 import { RealmApplicationURL } from 'src/model/realmApplicationURL.model';
@@ -19,6 +21,7 @@ export class RealmApplicationDialogComponent implements OnInit {
     private dialog: MatDialog,
     private realmApplicationService: RealmApplicationService,
     private realmApplicationURLService: RealmApplicationURLService,
+    private externalProviderService: ExternalProviderService,
   ) {}
 
   realmApplicationForm = this.formBuilder.group({
@@ -26,9 +29,15 @@ export class RealmApplicationDialogComponent implements OnInit {
     clientSecret: new FormControl('', [Validators.required]),
     displayName: new FormControl('', [Validators.required]),
     realmApplicationUrl: new FormControl(''),
+    externalProvider: this.formBuilder.group({
+      name: [''],
+      key: [''],
+      secret: [''],
+    }),
   });
 
   realmApplicationURLs: RealmApplicationURL[];
+  externalProviders: ExternalProvider[];
 
   createOrUpdateText: string;
   ngOnInit(): void {
@@ -37,6 +46,8 @@ export class RealmApplicationDialogComponent implements OnInit {
     this.realmApplicationForm.get('displayName').setValue(this.data?.realmApplication?.displayName);
     if (this.data.realmApplication) {
       this.realmApplicationService.getRealmApplicationById(this.data?.realmApplication?.id).subscribe((res) => {
+        console.log('test', res.externalProvider);
+        this.externalProviders = res.externalProvider;
         this.realmApplicationURLs = res.realmApplicationURLs;
       });
     }
@@ -76,6 +87,29 @@ export class RealmApplicationDialogComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  deleteExternalProvider(externalProvider: ExternalProvider) {
+    this.externalProviderService.deleteExternalProviderbyId(externalProvider.id).subscribe((res) => {
+      console.log('deleted external provider', res);
+
+      this.ngOnInit();
+    });
+  }
+
+  addExternalProvider() {
+    const newExternalProvider: ExternalProvider = {
+      key: this.realmApplicationForm.controls['externalProvider'].get('key').value,
+      name: this.realmApplicationForm.controls['externalProvider'].get('name').value,
+      realmApplicationId: this.data.realmApplication.id,
+      secret: this.realmApplicationForm.controls['externalProvider'].get('secret').value,
+      realmApplication: this.data.realmApplication,
+    };
+
+    this.externalProviderService.addExternalProvider(newExternalProvider).subscribe((res) => {
+      this.ngOnInit();
+    });
+  }
+
   onSubmit() {
     if (this.data.realmApplication) {
       this.data.realmApplication.clientId = this.realmApplicationForm.get('clientId').value;

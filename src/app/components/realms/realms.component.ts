@@ -32,6 +32,8 @@ export class RealmsComponent implements OnInit {
 
   ngOnInit(): void {
     this.realmService.getAppRealms().subscribe((res) => {
+      console.log('app Realms', res);
+
       this.realmData = res;
     });
     this.username = localStorage.getItem('username');
