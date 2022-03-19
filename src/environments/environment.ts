@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  skyhookUrl: 'http://192.168.178.20',
-  // skyhookUrl: 'http://192.168.178.108:3000',
-  clientId: 'Master Client',
+  skyhookUrl: 'http://localhost:3001',
+  clientId: 'skyhookclient',
   realmId: '1',
   skyhookApiEndpoint: '/api',
 };
