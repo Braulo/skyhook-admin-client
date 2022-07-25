@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  skyhookUrl: 'http://localhost:3001',
-  clientId: 'skyhookclient',
+  skyhookUrl: 'http://localhost:1337',
+  clientId: 'MasterRealmApp',
   realmId: '1',
   skyhookApiEndpoint: '/api',
 };
