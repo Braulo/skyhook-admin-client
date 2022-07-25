@@ -14,14 +14,18 @@ export class AuthGuardService implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.apiService.get(`/auth/checkToken`).pipe(
       mergeMap((user) =>
-        iif(() => {
-          if (!user) {
-            this.router.parseUrl('/login');
-            return false;
-          }
-          this.authService.saveTokenPayloadToLocalStorage();
-          return true;
-        }, of(true)),
+        iif(
+          () => {
+            if (!user) {
+              this.router.parseUrl('/login');
+              return false;
+            }
+            this.authService.saveTokenPayloadToLocalStorage();
+            return true;
+          },
+          of(true),
+          of(true),
+        ),
       ),
       catchError((err) => {
         this.router.navigateByUrl('/login');
