@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserDialogComponent } from './components/dialogs/user-dialog/user-dialog.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { CallbackComponent } from './components/callback/callback.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     UsersComponent,
     RealmUserRolesDialogComponent,
     UserDialogComponent,
+    CallbackComponent,
   ],
   imports: [
     BrowserModule,

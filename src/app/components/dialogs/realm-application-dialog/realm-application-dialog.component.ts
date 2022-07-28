@@ -46,7 +46,6 @@ export class RealmApplicationDialogComponent implements OnInit {
     this.realmApplicationForm.get('displayName').setValue(this.data?.realmApplication?.displayName);
     if (this.data.realmApplication) {
       this.realmApplicationService.getRealmApplicationById(this.data?.realmApplication?.id).subscribe((res) => {
-        console.log('test', res.externalProvider);
         this.externalProviders = res.externalProvider;
         this.realmApplicationURLs = res.realmApplicationURLs;
       });
