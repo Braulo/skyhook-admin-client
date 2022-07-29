@@ -8,7 +8,7 @@ export class AuthSkyhookFrontendService {
   constructor() {}
 
   endpoint: string = '/auth/login';
-  queryClient: string = `?client_id=${environment.clientId}&redirect_uri=http://localhost:3001/callback`;
+  queryClient: string = `?client_id=${environment.clientId}&redirect_uri=${environment.adminClientURLCallback}`;
 
   login() {
     window.location.href = `${environment.skyhookUrl}${this.endpoint}${this.queryClient}`;

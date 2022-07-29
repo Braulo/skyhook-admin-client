@@ -20,7 +20,10 @@
       </mat-form-field>
 
       <div class="container-urls">
-        <p>RealmApplication URL's (used for external login callback)</p>
+        <p>
+          RealmApplication URL's (used for external login callback) example 'http://localhost:4200/callback' (this will
+          get the following query params from the skyhook server'?accessToken=123&refreshToken=123')
+        </p>
         <mat-accordion *ngFor="let realmApplicationURL of realmApplicationURLs">
           <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header>
@@ -35,7 +38,12 @@
 
       <mat-form-field appearance="outline">
         <mat-label>URL</mat-label>
-        <input matInput placeholder="http://test" formControlName="realmApplicationUrl" id="realmApplicationUrl" />
+        <input
+          matInput
+          placeholder="http://localhost:4200/callback"
+          formControlName="realmApplicationUrl"
+          id="realmApplicationUrl"
+        />
       </mat-form-field>
       <button mat-raised-button type="button" (click)="addRealmApplicationURL()">Add</button>
 

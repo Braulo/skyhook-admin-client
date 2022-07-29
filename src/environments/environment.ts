@@ -8,6 +8,7 @@ export const environment = {
   clientId: 'MasterRealmApp',
   realmId: '1',
   skyhookApiEndpoint: '/api',
+  adminClientURLCallback: 'http://localhost:4200',
 };
 
 /*
